@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Food Ordering Website</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Welcome to FoodieExpress!</h1>
+    <!-- Navigation, user login/signup, etc., can be added here -->
+  </header>
+  
+  <main>
+    <section class="menu">
+      <h2>Menu</h2>
+      <!-- Display menu items dynamically -->
+      <div id="menuItems"></div>
+    </section>
+
+    <section class="cart">
+      <h2>Shopping Cart</h2>
+      <!-- Cart display and functionality -->
+      <div id="cartItems"></div>
+      <button onclick="checkout()">Checkout</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 FoodieExpress. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+/* Add your styles here for layout, colors, typography, etc. */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header, main, footer {
+  /* Define your layout */
+}
+
+/* Style for menu, cart, buttons, etc. */
+
+// Sample data for menu items
+const menuItems = [
+  { id: 1, name: "Burger", price: 8 },
+  { id: 2, name: "Pizza", price: 12 },
+  // Add more menu items
+];
+
+// Function to display menu items
+function displayMenu() {
+  const menuContainer = document.getElementById('menuItems');
+  menuItems.forEach(item => {
+    const menuItem = document.createElement('div');
+    menuItem.innerHTML = `<p>${item.name} - $${item.price}</p>
+                          <button onclick="addToCart(${item.id})">Add to Cart</button>`;
+    menuContainer.appendChild(menuItem);
+  });
+}
+
+// Function to add items to the cart
+function addToCart(itemId) {
+  // Logic to add items to the cart
+}
+
+// Function to handle checkout
+function checkout() {
+  // Logic to process the checkout
+}
+
+// Call displayMenu function on page load
+window.onload = displayMenu;
+
