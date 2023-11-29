@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz App</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Quiz Time!</h1>
+    <p id="question">Question goes here...</p>
+    <div id="options" class="options-container">
+      <!-- Options will be dynamically added here -->
+    </div>
+    <button onclick="checkAnswer()">Submit Answer</button>
+    <p id="result"></p>
+  </div>
+
+  <script src="quiz.js"></script>
+</body>
+</html>
+
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.quiz-container {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  margin-top: 20px;
+}
+
+const quizData = [
+  {
+    question: "What is the capital of France?",
+    options: ["Paris", "London", "Berlin", "Rome"],
+    answer: "Paris"
+  },
+  {
+    question: "Which planet is known as the Red Planet?",
+    options: ["Venus", "Mars", "Jupiter", "Mercury"],
+    answer: "Mars"
+  },
+  // Add more quiz questions following the same format
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function displayQuestion() {
+  const questionElement = document.getElementById('question');
+  const optionsElement = document.getElementById('options');
+
+  questionElement.textContent = quizData[currentQuestion].question;
+  optionsElement.innerHTML = '';
+
+  quizData[currentQuestion].options.forEach(option => {
+    const button = document.createElement('button');
+    button.textContent = option;
+    button.onclick = () => checkOption(option);
+    optionsElement.appendChild(button);
+  });
+}
+
+function checkOption(selectedOption) {
+  const correctAnswer = quizData[currentQuestion].answer;
+  const resultElement = document.getElementById('result');
+
+  if (selectedOption === correctAnswer) {
+    score++;
+    resultElement.textContent = 'Correct!';
+  } else {
+    resultElement.textContent = 'Incorrect!';
+  }
+
+  currentQuestion++;
+
+  if (currentQuestion < quizData.length) {
+    displayQuestion();
+  } else {
+    const quizContainer = document.querySelector('.quiz-container');
+    quizContainer.innerHTML = `<h2>Quiz Completed!</h2><p>Your Score: ${score} out of ${quizData.length}</p>`;
+  }
+}
+
+function checkAnswer() {
+  const selectedOption = document.querySelector('button.selected');
+  if (selectedOption) {
+    checkOption(selectedOption.textContent);
+  } else {
+    alert('Please select an option!');
+  }
+}
+
+displayQuestion();
