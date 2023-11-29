@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Typing Speed Test</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Typing Speed Test</h1>
+  <p id="sentence">The quick brown fox jumps over the lazy dog.</p>
+  <textarea id="input" placeholder="Start typing here..."></textarea>
+  <button onclick="calculateSpeed()">Calculate Speed</button>
+  <p id="result"></p>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+CSS (styles.css):
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+textarea {
+  width: 80%;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+JavaScript (script.js):
+function calculateSpeed() {
+  const sentence = document.getElementById('sentence').innerText.trim();
+  const input = document.getElementById('input').value.trim();
+
+  const words = sentence.split(' ');
+  const inputWords = input.split(' ');
+
+  let correctWords = 0;
+  for (let i = 0; i < words.length; i++) {
+    if (words[i] === inputWords[i]) {
+      correctWords++;
+    }
+  }
